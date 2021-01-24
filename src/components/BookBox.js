@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import shelvesTranslations from "../utils/shelvesTranslations";
 
-function BookBox ({book, shelves, onChangeShelf}) {
+function BookBox({book, shelves, onChangeShelf}) {
   return (
     <div className='book'>
       <div className='book-top'>
@@ -14,16 +14,27 @@ function BookBox ({book, shelves, onChangeShelf}) {
         />
         <div className='book-shelf-changer'>
           <select
-            value={book.shelf}
+            value={book.shelf || 'None'}
             onChange={(e) => onChangeShelf(book, e.target.value)}
           >
             {!!shelves && shelves.map(shelf => {
               return (
-                <option key={shelf} value={shelf}>{shelvesTranslations(shelf)}</option>
+                <option
+                  key={shelf}
+                  value={shelf}
+                  className={(book.shelf === shelf ? 'book-shelf-changer-selected-option' : '')}
+                >
+                  {shelvesTranslations(shelf)}
+                </option>
               )
             })}
+            <option
+              value={'None'}
+              className={(!book.shelf ? 'book-shelf-changer-selected-option' : '')}
+            >
+              None
+            </option>
           </select>
-
         </div>
       </div>
       <p className='book-title'>{book.title}</p>

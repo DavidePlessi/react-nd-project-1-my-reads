@@ -198,6 +198,9 @@ button:active {
     opacity: 0;
     cursor: pointer;
 }
+.book-shelf-changer-selected-option {
+    color: #60ac5d
+}
 
 /* book cover */
 

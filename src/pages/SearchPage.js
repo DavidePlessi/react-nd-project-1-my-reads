@@ -1,15 +1,15 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
 import * as BooksApi from '../BooksAPI';
 import _ from 'lodash';
 import BookList from "../components/BookList";
+import SearchBoxBar from "../components/SearchBoxBar";
 
 class SearchPage extends Component {
   state = {
-    books: [],
-    searchTerm: ''
+    books: []
   }
+  searchTimeout = null
   changeBookShelf = async (book, newShelf) => {
     this.props.setLoading(true);
     await BooksApi.update(book, newShelf);
@@ -19,39 +19,33 @@ class SearchPage extends Component {
       return {
         books: [
           ...currState.books.slice(0, indexOfBook),
+          {...book, shelf: newShelf},
           ...currState.books.slice(indexOfBook + 1)
         ]
       }
     })
   }
   searchFroBooks = async (query) => {
-    let books = [];
+    if(this.searchTimeout) clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(async () => {
+      let books = [];
+      if(query) {
+        this.props.setLoading(true);
+        books = await BooksApi.search(query);
+        this.props.setLoading(false);
+      }
 
-    if(query)
-      books = await BooksApi.search(query);
+      if(!_.isArray(books)) books = [];
+      this.setState({books: books})
 
-    if(!_.isArray(books)) books = [];
-    this.setState({books: books})
-  }
-  updateSearchTerm = async (text) => {
-    text = text.trim();
-    this.setState({searchTerm: text})
-    await this.searchFroBooks(text);
+    }, 500)
   }
   render() {
-    const {searchTerm, books} = this.state
+    const {books} = this.state
     const {shelves} = this.props
     return (
       <>
-        <div className='search-books-bar'>
-          <Link to='/' className='close-search'/>
-          <input
-            type='text'
-            placeholder='Search for books'
-            value={searchTerm}
-            onChange={(e) => this.updateSearchTerm(e.target.value)}
-          />
-        </div>
+        <SearchBoxBar onSearchFroBooks={this.searchFroBooks}/>
         <div className='search-books-results'>
           <BookList shelves={shelves} onChangeShelf={this.changeBookShelf} books={books}/>
         </div>

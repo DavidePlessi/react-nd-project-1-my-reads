@@ -24,13 +24,17 @@ class MainPage extends Component {
     this.props.setLoading(true);
     await BooksApi.update(book, newShelf);
     this.props.setLoading(false);
-    this.setState(currState => ({
-      booksGroupedByShelf: {
+    this.setState(currState => {
+      const newValue = {
         ...currState.booksGroupedByShelf,
-        [book.shelf]: currState.booksGroupedByShelf[book.shelf].filter(b => b.id !== book.id),
-        [newShelf]: currState.booksGroupedByShelf[newShelf].concat([{...book, shelf: newShelf}])
+        [book.shelf]: currState.booksGroupedByShelf[book.shelf].filter(b => b.id !== book.id)
+      };
+      if(newShelf && newShelf !== 'None')
+        newValue[newShelf]= currState.booksGroupedByShelf[newShelf].concat([{...book, shelf: newShelf}])
+      return {
+        booksGroupedByShelf: newValue
       }
-    }));
+    });
   }
   render() {
     const {booksGroupedByShelf} = this.state;
