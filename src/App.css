@@ -10,6 +10,20 @@ body, .app {
     background: white;
 }
 
+/* loading */
+.loading-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .8);
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+}
+.loading-container h1{
+    margin-top: 50vh;
+}
 /* main page */
 
 .list-books-title {
@@ -53,7 +67,7 @@ body, .app {
     bottom: 25px;
 }
 
-.open-search button {
+.open-search a {
     display: block;
     width: 50px;
     height: 50px;
@@ -68,7 +82,7 @@ body, .app {
     outline: 0;
 }
 
-.open-search button:hover {
+.open-search a:hover {
     background-color: rgb(0, 102, 0);
 }
 
@@ -140,6 +154,7 @@ button:active {
 
 .book {
     width: 140px;
+    margin-right: 10px;
 }
 
 .book-title,
