@@ -47,7 +47,6 @@ class MainPage extends Component {
         <div className='list-books-content'>
           {!!shelves && shelves.map(shelf => (
             !!booksGroupedByShelf[shelf] &&
-            booksGroupedByShelf[shelf].length > 0 &&
             <BookShelf
               key={shelf}
               shelves={shelves}

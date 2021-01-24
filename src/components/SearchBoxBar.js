@@ -7,7 +7,6 @@ class SearchBoxBar extends Component{
     searchTerm: ''
   }
   updateSearchTerm = async (text) => {
-    text = text.trim();
     this.setState({searchTerm: text})
     await this.props.onSearchFroBooks(text);
   }
