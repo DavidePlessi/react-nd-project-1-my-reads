@@ -7,9 +7,7 @@ import {Link} from "react-router-dom";
 
 class MainPage extends Component {
   state = {
-    booksGroupedByShelf: [],
-    shelves: ["currentlyReading", "wantToRead", "read"],
-    loading: false
+    booksGroupedByShelf: []
   }
   async componentDidMount() {
     this.props.setLoading(true);
@@ -17,7 +15,7 @@ class MainPage extends Component {
     this.props.setLoading(false);
     const booksGroupedByShelfFromApi = _.groupBy(res, 'shelf');
     const booksGroupedByShelf = {};
-    this.state.shelves.forEach(shelf => {
+    this.props.shelves.forEach(shelf => {
       booksGroupedByShelf[shelf] = booksGroupedByShelfFromApi[shelf] || []
     })
     this.setState({booksGroupedByShelf})
@@ -35,7 +33,8 @@ class MainPage extends Component {
     }));
   }
   render() {
-    const {shelves, booksGroupedByShelf} = this.state;
+    const {booksGroupedByShelf} = this.state;
+    const {shelves} = this.props;
     return (
       <>
         <div className='list-books-title'>

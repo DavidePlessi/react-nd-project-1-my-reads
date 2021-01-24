@@ -6,7 +6,7 @@ function BookBox ({book, shelves, onChangeShelf}) {
     <div className='book'>
       <div className='book-top'>
         <img
-          src={book.imageLinks.smallThumbnail}
+          src={(!!book.imageLinks && !!book.imageLinks.smallThumbnail && book.imageLinks.smallThumbnail)}
           alt='thumbnail'
           className='book-cover'
           height='100%'
@@ -27,7 +27,7 @@ function BookBox ({book, shelves, onChangeShelf}) {
         </div>
       </div>
       <p className='book-title'>{book.title}</p>
-      <p className='book-authors'>{book.authors.join(', ')}</p>
+      <p className='book-authors'>{!!book.authors && book.authors.join(', ')}</p>
     </div>
   )
 }
