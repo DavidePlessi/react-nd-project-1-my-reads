@@ -1,6 +1,26 @@
 # My Reads
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+
+This project allow you to lunch a website to keep track of your reads, you can:
+- View your personal shelves with books
+- Change book's shelf
+- Add new books to your shelves in the search page
+- Remove books from shelves
+
+## Project structure
+The project is a classic React project with the following folder structure:
+
+- public (containing the public part without react)
+- src (containing all the application source)
+    - components (containing the minor components)
+    - icons (containing the icon used in the React app)
+    - pages (containing the pages component)
+    - utils (containing some utils)
+
+## Install dependencies
+In the project directory you can run `yarn install` or `npm start` to get all the required dependencies
+
 
 ## Available Scripts
 
@@ -38,9 +58,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Description
-This project allow you to lunch a website to keep track of your reads, you can:
-- Change book's shelf
-- Add new books to your shelves in the search page
-- Remove books from shelves

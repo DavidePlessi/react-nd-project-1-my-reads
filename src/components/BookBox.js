@@ -24,7 +24,7 @@ function BookBox({book, shelves, onChangeShelf}) {
                   value={shelf}
                   className={(book.shelf === shelf ? 'book-shelf-changer-selected-option' : '')}
                 >
-                  {shelvesTranslations(shelf)}
+                  {book.shelf === shelf && '> '}{shelvesTranslations(shelf)}
                 </option>
               )
             })}
@@ -32,7 +32,7 @@ function BookBox({book, shelves, onChangeShelf}) {
               value={'None'}
               className={(!book.shelf ? 'book-shelf-changer-selected-option' : '')}
             >
-              None
+              {!book.shelf && '> '} None
             </option>
           </select>
         </div>

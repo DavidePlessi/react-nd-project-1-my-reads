@@ -19,7 +19,7 @@ class SearchPage extends Component {
       return {
         books: [
           ...currState.books.slice(0, indexOfBook),
-          {...book, shelf: newShelf},
+          {...book, shelf: newShelf === 'None' ? null : newShelf},
           ...currState.books.slice(indexOfBook + 1)
         ]
       }
