@@ -7,7 +7,18 @@ import SearchBoxBar from "../components/SearchBoxBar";
 
 class SearchPage extends Component {
   state = {
-    books: []
+    books: [],
+    booksOnShelves: {}
+  }
+  async componentDidMount() {
+    this.props.setLoading(true);
+    const res = await BooksApi.getAll()
+    this.props.setLoading(false);
+    const booksOnShelves = {};
+    res.forEach(book => {
+      booksOnShelves[book.id]= book.shelf
+    })
+    this.setState({booksOnShelves});
   }
   searchTimeout = null
   changeBookShelf = async (book, newShelf) => {
@@ -16,12 +27,14 @@ class SearchPage extends Component {
     this.props.setLoading(false);
     this.setState(currState => {
       const indexOfBook = _.findIndex(currState.books, (b) => b.id === book.id);
+      const shelf = newShelf === 'None' ? null : newShelf
       return {
         books: [
           ...currState.books.slice(0, indexOfBook),
-          {...book, shelf: newShelf === 'None' ? null : newShelf},
+          {...book, shelf },
           ...currState.books.slice(indexOfBook + 1)
-        ]
+        ],
+        booksOnShelves: {...currState.booksOnShelves, [book.id]: shelf}
       }
     })
   }
@@ -36,7 +49,9 @@ class SearchPage extends Component {
       }
 
       if(!_.isArray(books)) books = [];
-      this.setState({books: books})
+      this.setState(currState => (
+        {books: books.map(b => ({...b, shelf: currState.booksOnShelves[b.id] ?? null}))}
+      ))
 
     }, 500)
   }

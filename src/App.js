@@ -12,12 +12,12 @@ function App() {
   return (
     <div className="App">
       <LoadingFeedback isLoading={isLoading}/>
-      <Route exact path='/' render={() => (
+      <Route exact path='/'>
         <MainPage setLoading={setIsLoading} shelves={shelves}/>
-      )}/>
-      <Route exact path='/search' render={() => (
+      </Route>
+      <Route exact path='/search'>
         <SearchPage setLoading={setIsLoading} shelves={shelves}/>
-      )}/>
+      </Route>
     </div>
   );
 }
