@@ -19,7 +19,7 @@ The project is a classic React project with the following folder structure:
     - utils (containing some utils)
 
 ## Install dependencies
-In the project directory you can run `yarn install` or `npm start` to get all the required dependencies
+In the project directory you can run `yarn install` or `npm install` to get all the required dependencies
 
 
 ## Available Scripts
